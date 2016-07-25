@@ -1,0 +1,47 @@
+#result {
+    font-family: sans-serif ; 
+}
+
+
+#result a {
+    color: black; 
+}
+
+
+#result a:link {
+    text-decoration: none ;
+} 
+
+#result a:visited {
+    text-decoration: none ;
+}
+
+#result tr:hover {
+    background-color: yellow ; 
+}
+
+result a:active {
+}
+
+
+#result > div {
+  border: 1px solid orange ; 
+  display: table ; 
+}
+
+#result > div > a :hover {
+  background-color: yellow ; 
+}
+
+#result > div > a > div {
+  display: table-row ;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+#result > div > a > div > div {
+  display: table-cell ; 
+  width: 200px ; 
+}
+
+
+

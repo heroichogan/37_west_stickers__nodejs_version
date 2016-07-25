@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <link rel="stylesheet" type="text/css" href="styles.css">
+     <script>
+      function toHTML( sData ) {
+        // JSON parse sData
+        var data = JSON.parse( sData ) ;
+             
+        // Build rows
+        var rowMarkup = '' ;
+        for( rowIndex=0; rowIndex < data.length; rowIndex++ ) { 
+          var tr = `<div><div>${data[rowIndex][0]}</div><div>${data[rowIndex][1]}</div><div>${data[rowIndex][2]}</div></div>` ; 
+          var a = `<a href='./stickers?row=${rowIndex}'>${tr}</a><br/>` ; 
+          var rowMarkup = rowMarkup + a ;  
+        }     
+        return `<div>${rowMarkup}</div>` ;  ; 
+      }
+
+    </script>
+   </head>
+   <body>
+      <div id='result'>No data yet</div>
+      <script>
+         // If compatible, register and define callback.
+         if(typeof(EventSource) !== 'undefined') {
+            var source = new EventSource('app.js');
+            source.onmessage = function(event) {
+              document.getElementById('result').innerHTML = toHTML( event.data ) ; 
+            };
+         // Otherwise, treat the viewer to a nice error message. 
+         } else {
+             document.getElementById('result').innerHTML = 'Sorry, your browser does not support server-sent events...';
+         }
+      </script>
+   </body>
+</html>

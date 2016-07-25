@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="8.5in" height="11in" >
+ 
+<script>
+  <![CDATA[
+    function smooches( sData ) {
+      var data = JSON.parse( sData ) ; 
+      var h = document.location.href ; 
+      var rowIndex = h.split('=')[1] ; 
+      return data[parseInt(rowIndex)] ; 
+    }
+    
+     // If compatible, register and define callback.
+    if(typeof(EventSource) !== 'undefined') {
+      var source = new EventSource('app.js');
+      source.onmessage = function(event) {
+        var row = smooches( event.data ) ; 
+        document.getElementById('line1').textContent = row[0] ; 
+        document.getElementById('line2').textContent = row[1] ; 
+        document.getElementById('price').textContent = row[2] ; 
+      };
+    // Otherwise, treat the viewer to a nice error message. 
+    } else {
+        document.getElementById('result').textContent = 'Server-sourced events are not supported.' ; 
+    }
+  ]]>
+</script>
+
+<rect x="0" y="0" width="8.5in" height="11in"/>
+<defs>
+  <g id="sticker" style="font-family: Arial;">
+    <circle  cy="0.125in" r="1in"  fill="white"/>
+    <text    x="0in" dy="0.35in"   text-anchor="middle" 
+             style="font-size: 34;" id='line1'/>
+    <text    x="0in" dy="0.57in"   text-anchor="middle" id='line2'/>
+    <text    x="0in" dy="0.8in"    text-anchor="middle" id='price'/>
+  </g>
+  
+  <g id="row">
+    <use xlink:href="#sticker" x="1.25in" />
+    <use xlink:href="#sticker" x="3.5in" />
+    <use xlink:href="#sticker" x="5.75in" />
+  </g>
+</defs>
+
+<use xlink:href="#row" y="1.25in"/>
+<use xlink:href="#row" y="3.5in"/>
+</svg>
